@@ -1,0 +1,8 @@
+{
+  "name": "@angular/material-experimental/mdc-menu",
+  "typings": "../mdc-menu.d.ts",
+  "main": "../bundles/material-experimental-mdc-menu.umd.js",
+  "module": "../esm5/mdc-menu.es5.js",
+  "es2015": "../esm2015/mdc-menu.js",
+  "sideEffects": false
+}

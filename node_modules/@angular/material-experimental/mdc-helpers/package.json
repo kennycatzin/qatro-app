@@ -1,0 +1,8 @@
+{
+  "name": "@angular/material-experimental/mdc-helpers",
+  "typings": "../mdc-helpers.d.ts",
+  "main": "../bundles/material-experimental-mdc-helpers.umd.js",
+  "module": "../esm5/mdc-helpers.es5.js",
+  "es2015": "../esm2015/mdc-helpers.js",
+  "sideEffects": false
+}

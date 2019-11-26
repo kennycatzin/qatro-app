@@ -1,0 +1,8 @@
+{
+  "name": "@angular/material-experimental/popover-edit",
+  "typings": "../popover-edit.d.ts",
+  "main": "../bundles/material-experimental-popover-edit.umd.js",
+  "module": "../esm5/popover-edit.es5.js",
+  "es2015": "../esm2015/popover-edit.js",
+  "sideEffects": false
+}

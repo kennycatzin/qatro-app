@@ -1,0 +1,8 @@
+{
+  "name": "@angular/material-experimental/mdc-slide-toggle",
+  "typings": "../mdc-slide-toggle.d.ts",
+  "main": "../bundles/material-experimental-mdc-slide-toggle.umd.js",
+  "module": "../esm5/mdc-slide-toggle.es5.js",
+  "es2015": "../esm2015/mdc-slide-toggle.js",
+  "sideEffects": false
+}

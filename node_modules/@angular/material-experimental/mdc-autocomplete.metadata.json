@@ -1,0 +1,12 @@
+{
+  "__symbolic": "module",
+  "version": 3,
+  "metadata": {},
+  "exports": [
+    {
+      "from": "./mdc-autocomplete/index"
+    }
+  ],
+  "flatModuleIndexRedirect": true,
+  "importAs": "@angular/material-experimental/mdc-autocomplete"
+}

@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="xs-section-heading2 text-center">
+            <h2>Bienvenido a <span>Qatro</span></h2>
+            <p>Conozca la forma más entretenida y eficaz de mantenerse en forma</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div *ngFor="let obj of objDisciplinas" class="col-lg-4">
+        <div class="card negro">
+            <a [routerLink]="['/calendario']">
+                <div class="xs-section-heading2 text-center">
+                    <h2>{{ obj.nombre }}</h2>
+                </div>
+                <img src="{{ kenny() }}/uploads/disciplinas/{{obj.img}}" alt="Avatar" class="image" style="width:100%">
+                <div class="middle">
+                    <div class="text">{{ obj.descripcion }}</div>
+                </div>
+                <br>
+            </a>
+        </div>
+    </div>
+
+
+
+</div>

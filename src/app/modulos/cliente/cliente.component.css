@@ -1,0 +1,59 @@
+.negro {
+    background-color: #1D2124;
+}
+
+.xs-section-heading,
+.xs-section-heading2 {
+    margin-bottom: 70px;
+    color: #666565;
+}
+
+.xs-section-heading h2 span,
+.xs-section-heading2 h2 span {
+    color: #EE784A;
+}
+
+.xs-section-heading p,
+.xs-section-heading2 p {
+    font-size: 1.125rem;
+}
+
+.xs-section-heading2 h2,
+.xs-section-heading2 p {
+    color: #FFFFFF;
+}
+
+.xs-services-intro .xs-section-heading,
+.xs-services-intro .xs-section-heading2 {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.xs-help .xs-section-heading,
+.xs-help .xs-section-heading2 {
+    margin-bottom: 0;
+}
+
+.xs-contact-form .xs-section-heading,
+.xs-dark-shadow .xs-section-heading,
+.xs-contact-form .xs-section-heading2,
+.xs-dark-shadow .xs-section-heading2 {
+    margin-bottom: 0;
+}
+
+.xs-contact-form .xs-section-heading p,
+.xs-dark-shadow .xs-section-heading p,
+.xs-contact-form .xs-section-heading2 p,
+.xs-dark-shadow .xs-section-heading2 p {
+    font-size: 1rem;
+}
+
+.xs-cta .xs-section-heading,
+.xs-cta .xs-section-heading2,
+.xs-cta h2 {
+    margin: 0;
+}
+
+.oran {
+    color: #EE784A;
+}

@@ -1,0 +1,8 @@
+{
+  "name": "@angular/material-experimental/mdc-radio",
+  "typings": "../mdc-radio.d.ts",
+  "main": "../bundles/material-experimental-mdc-radio.umd.js",
+  "module": "../esm5/mdc-radio.es5.js",
+  "es2015": "../esm2015/mdc-radio.js",
+  "sideEffects": false
+}

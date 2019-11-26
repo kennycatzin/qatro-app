@@ -1,0 +1,60 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+Agregar usuario
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nuevo usuario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <form ngNativeValidate [formGroup]="forma">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nombre</label>
+                        <input formControlName="nombre" type="text" class="form-control" name="nombre" aria-describedby="emailHelp" placeholder="Ingrese el nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Correo</label>
+                        <input formControlName="email" type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Ingrese el correo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Contraseña</label>
+                        <input formControlName="password" type="password" class="form-control" name="password" aria-describedby="emailHelp" placeholder="Ingrese la contraseña" required>
+                    </div>
+                    <div class="form-group" *ngIf="forma.errors?.sonIguales && !forma.pristine">
+                        <p class="text-danger">
+                            Las contraseñas deben de coincidir
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Confirme contraseña</label>
+                        <input formControlName="password2" type="password" class="form-control" name="password2" aria-describedby="emailHelp" placeholder="Confirme la contraseña" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Seleccione un rol</label>
+                        <select class="form-control" name="rol">
+                              <option>Administrador</option>
+                              <option>Operativo</option>                             
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Imagen</label>
+                        <input type="file" class="form-control" id="img" placeholder="Password">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" (click)="guardar()" class="btn btn-info">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

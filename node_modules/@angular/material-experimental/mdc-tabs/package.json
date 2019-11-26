@@ -1,0 +1,8 @@
+{
+  "name": "@angular/material-experimental/mdc-tabs",
+  "typings": "../mdc-tabs.d.ts",
+  "main": "../bundles/material-experimental-mdc-tabs.umd.js",
+  "module": "../esm5/mdc-tabs.es5.js",
+  "es2015": "../esm2015/mdc-tabs.js",
+  "sideEffects": false
+}

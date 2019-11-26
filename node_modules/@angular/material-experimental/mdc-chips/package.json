@@ -1,0 +1,8 @@
+{
+  "name": "@angular/material-experimental/mdc-chips",
+  "typings": "../mdc-chips.d.ts",
+  "main": "../bundles/material-experimental-mdc-chips.umd.js",
+  "module": "../esm5/mdc-chips.es5.js",
+  "es2015": "../esm2015/mdc-chips.js",
+  "sideEffects": false
+}

@@ -1,0 +1,150 @@
+<div class="row text-center">
+    <!-- Column -->
+    <div class="col-lg-4 mx-auto">
+        <div class="card text-center bg-dark text-white">
+            <div class="card-body">
+                <div class="m-t-30 mx-auto"> <img src="{{ usuario.img | imagen }}" class="img-circle" width="150" />
+                    <h4 class="text-white card-title m-t-10">{{usuario.name}}</h4>
+                    <h6 class="card-subtitle">{{usuario.apellidoPaterno}} {{usuario.apellidoMaterno}}</h6>
+
+                </div>
+            </div>
+            <div>
+                <hr> </div>
+            <div class="card-body"> <small class="naranja">Email address </small>
+                <h6 class="text-white">{{usuario.email}}</h6> <small class="naranja p-t-30 db">Phone</small>
+                <h6 class="text-white">{{usuario.telefono}}</h6>
+                <!-- <small class="naranja p-t-30 db">Address</small> -->
+                <!-- <h6 class="text-white">71 Pilgrim Avenue Chevy Chase, MD 20815</h6> -->
+
+                <br/>
+
+            </div>
+        </div>
+        <button class="btn btn-block btn-info" data-toggle="modal" data-target="#exampleModal">Editar perfil</button>
+    </div>
+    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+        <div class="modal-dialog bg-dark" role="document">
+            <div class="modal-content bg-dark">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Editar perfil</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card ">
+                                <div class="card-header bg-info">
+                                    <h4 class="m-b-0 text-white">Other Sample Horizontal form</h4>
+                                </div>
+                                <div class="card-body bg-dark">
+
+                                    <div class="form-body">
+                                        <hr class="m-t-0 ">
+                                        <div class="">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <form ngNativeValidate #f="ngForm" (ngSubmit)="actualizarUsuario( f.value )" class="form text-center">
+
+                                                        <div class="form-group">
+                                                            <label for="exampleInputuname">Nombres</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="ti-user"></i></div>
+                                                                <input [(ngModel)]="usuario.name" name="name" type="text" class="form-control" placeholder="Nombres" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputuname">Apellido paterno</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="ti-world"></i></div>
+                                                                <input [(ngModel)]="usuario.apellidoPaterno" name="apellidoPaterno" type="text" class="form-control" placeholder="Apellido paterno" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputuname">Apellido materno</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="ti-face-smile"></i></div>
+                                                                <input [(ngModel)]="usuario.apellidoMaterno" name="apellidoMaterno" type="text" class="form-control" placeholder="Apellido materno" required>
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="form-group">
+                                                            <label for="exampleInputEmail1">Correo</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="ti-email"></i></div>
+                                                                <input [(ngModel)]="usuario.email" name="correo" [ngModelOptions]="{standalone: true}" name="email" type="email" class="form-control" id="Correo" placeholder="Correo" required>
+                                                            </div>
+                                                        </div> -->
+                                                        <div class="form-group">
+                                                            <label for="pwd1">Teléfono</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="ti-mobile"></i></div>
+                                                                <input [(ngModel)]="usuario.telefono" name="telefono" name="telefono" type="number" class="form-control" id="Teléfono" placeholder="Teléfono" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="pwd1">Fecha de nacimiento</label>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon"><i class="ti-calendar"></i></div>
+                                                                <input [(ngModel)]="usuario.fechaNacimiento" name="fechaNacimiento" type="date" class="form-control " id="nacimiento " placeholder="Fecha de nacimiento " required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group ">
+                                                            <label for="pwd1 ">Género</label>
+                                                            <div class="input-group ">
+                                                                <div class="input-group-addon "><i class="ti-flag-alt "></i></div>
+                                                                <select [(ngModel)]="usuario.genero" name="genero" class="form-control blanco ">
+                                    
+                                                                    <option value="MASCULINO">Masculino</option>
+                                                                    <option value="FEMENINO">Femenino</option>
+                                                                  </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label for="pwd1 ">Contraseña</label>
+                                                            <div class="input-group ">
+                                                                <div class="input-group-addon "><i class="ti-lock "></i></div>
+                                                                <input [(ngModel)]="usuario.password" name="password1" type="password" class="form-control " id="pwd1 " placeholder="password " required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group " *ngIf="forma.errors?.sonIguales && !forma.pristine ">
+                                                            <p class="text-danger ">
+                                                                Las contraseñas deben de coincidir
+                                                            </p>
+                                                        </div>
+                                                        <div class="form-group ">
+                                                            <label for="pwd2 ">Confirme contraseña</label>
+                                                            <div class="input-group ">
+                                                                <div class="input-group-addon "><i class="ti-lock "></i></div>
+                                                                <input [(ngModel)]="usuario.password" name="password2" type="password" class="form-control " id="pwd2 " placeholder="password " required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer ">
+                                                            <button type="button " class="btn btn-warning ">Guardar</button>
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer ">
+                        <button type="button " class="btn btn-secondary " data-dismiss="modal ">Cerrar</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

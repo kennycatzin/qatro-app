@@ -1,0 +1,8 @@
+{
+  "name": "@angular/material-experimental/mdc-card",
+  "typings": "../mdc-card.d.ts",
+  "main": "../bundles/material-experimental-mdc-card.umd.js",
+  "module": "../esm5/mdc-card.es5.js",
+  "es2015": "../esm2015/mdc-card.js",
+  "sideEffects": false
+}

@@ -1,0 +1,8 @@
+{
+  "name": "@angular/material-experimental/mdc-slider",
+  "typings": "../mdc-slider.d.ts",
+  "main": "../bundles/material-experimental-mdc-slider.umd.js",
+  "module": "../esm5/mdc-slider.es5.js",
+  "es2015": "../esm2015/mdc-slider.js",
+  "sideEffects": false
+}

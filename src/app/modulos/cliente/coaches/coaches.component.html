@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="xs-section-heading2 text-center">
+            <h2>Conozca a nuestros <span>instructores</span></h2>
+            <p>Consulta tu clase e instructor favorito dándole click.</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="row">
+    <div *ngFor="let obj of objCoaches" class="col-lg-3">
+        <div class="card negro">
+            <img src="{{ kenny() }}/uploads/coaches/{{obj.img}}" width="50%" height="300" class="card-img-top" alt="...">
+            <div class="card-body">
+                <div class="card-body ">
+                    <h5 class="oran">{{ obj.alias }}</h5>
+                    <p class="card-text ">{{ obj.frase }}</p>
+                    <ul _ngcontent-ubd-c6="" class="list-inline soc-pro m-t-30 text-center text-warning">
+                        <li _ngcontent-ubd-c6=""><a _ngcontent-ubd-c6="" href="{{ obj.twitter }}"><i _ngcontent-ubd-c6="" class="fa fa-twitter text-white"></i></a></li>
+                        <li _ngcontent-ubd-c6=""><a _ngcontent-ubd-c6="" href="{{ obj.facebook }}"><i _ngcontent-ubd-c6="" class="fa fa-facebook-square text-white"></i></a></li>
+                        <li _ngcontent-ubd-c6=""><a _ngcontent-ubd-c6="" href="{{ obj.instagram }}"><i _ngcontent-ubd-c6="" class="fa fa-instagram text-white"></i></a></li>
+                    </ul>
+
+                    <button class="btn-warning btn-block">Ver más</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
