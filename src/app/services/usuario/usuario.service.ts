@@ -83,16 +83,19 @@ export class UsuarioService {
       let url = URL_SERVICIOS + '/usuario/' + usuario._id;
       return this.http.put( url, usuario )
         .pipe(map( (resp: any) => {
+          if( usuario._id === this.usuario._id) {
+            let usuarioDB: Usuario = resp.usuario;
+            this.guardarStorage(localStorage.getItem('id'), localStorage.getItem('token'), usuarioDB, resp.menu);
+          }
           swal.fire('Usuario actualizado exitósamente', '' + usuario.email + '', 'success');
-          this.guardarStorage(localStorage.getItem('id'), localStorage.getItem('token'), resp.usuario, localStorage.getItem('menu'));
           return resp.usuario;
         }), catchError(err => {
           swal.fire(err.error.mensaje,  'Ha ocurrido un error con la actualización', 'error');
           return Observable.throw(err);
         }));
     }
-    obtenerUsuarios() {
-        let url = URL_SERVICIOS + '/usuario';
+    obtenerUsuarios( desde: Number = 0) {
+        let url = URL_SERVICIOS + '/usuario?desde=' + desde;
         return this.http.get(url);
     }
   logout(){
@@ -112,6 +115,20 @@ export class UsuarioService {
     .catch( (resp: any) => {
       swal.fire('Operación con errores', '' + resp.mensaje + '', 'info');
     });
+  }
+  buscarUsuario( nombre: string ) {
+    let url = URL_SERVICIOS + '/busqueda/coleccion/usuarios/' + nombre;
+    return this.http.get(url)
+            .pipe(map((resp: any) => resp.usuarios));
+
+  }
+  borrarUsuario(id: string) {
+    let url = URL_SERVICIOS + '/usuario/' + id;
+    return this.http.delete(url)
+    .pipe(map((resp: any) => {
+      swal.fire('Usuario eliminado', 'El usuario se ha eliminado correctamente', 'success')
+      return true;
+    }));
   }
 }
 

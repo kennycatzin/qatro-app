@@ -1,1 +1,162 @@
-<p>admin-disciplinas works!</p>
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <!-- <input #input (keyup)="buscar( input.value )" class="form-control" type="text" placeholder="Buscar disciplina..."> -->
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="col-sm-12" *ngIf="cargando">
+    <div class="alert alert-warning text-center">
+        <strong>Cargando</strong>
+        <br>
+        <i class="fa fa-refresh fa-spin fa-2x"></i>
+        <br>
+        <span>Espere por favor</span>
+    </div>
+</div>
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <!-- <div class="text-right">
+                        <button data-toggle="modal" data-target=".bd-example-modal-lg" class="btn waves-effect waves-light btn-rounded btn-info">
+                        <i class="fa fa-plus">           
+                        </i>  Crear usuario</button>
+                    </div> -->
+                <h3 class="card-title">Disciplinas registrados (<small>{{this.totalRegistros}}</small>)</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>tipo</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr *ngFor="let obj of objetos">
+                            <td class="w70"><img data-toggle="modal" data-target="#cargaImagenes" (click)="hola(obj)" class="img-50 img-circle" src="{{ obj.img | imagen }}" alt=""></td>
+                            <td>{{obj.nombre}}</td>
+                            <td>
+                                <i class="fa fa-save">{{obj.tipo}}</i>
+                            </td>
+                            <td class="text-center">
+                                <button (click)="actulizar(obj)" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-info"><i class="fa fa-save"></i></button>
+                                <button (click)="borrar(obj)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr> -->
+                        <!-- <button (click)="cambiarDesde(-6)" class="btn btn-secondary m-auto">Anteriores</button>
+                        <button (click)="cambiarDesde(6)" class="btn btn-secondary m-auto">Siguientes</button> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="cargaImagenes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <div class="card">
+                        <!-- <div class="car-body text-center">
+                            <h4 class="card-title">Fotografía del usuario</h4>
+                            <h6 class="card-subtitle">{{objetoModify.nombre}}</h6>
+                            <img *ngIf="!imagenTemp" class="w150" [src]="objetoModify.img | imagen" alt="">
+                            <img *ngIf="imagenTemp" class="w150" [src]="imagenTemp" alt="">
+                            <input (change)="seleccionImagen( $event.target.files[0] )" type="file">
+                        </div> -->
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!-- <button (click)="traerDatos()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="button" class="btn btn-success">Guardar</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Módulo de usuarios</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body blanco">
+                        <form ngNativeValidate [formGroup]="forma" (ngSubmit)="registro()" class="form-horizontal form-material" id="loginform" action="index.html">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nombres</label>
+                                <input formControlName="name" type="text" class="form-control blanco" name="name" aria-describedby="emailHelp" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Apellido Paterno</label>
+                                <input formControlName="apellidoPaterno" type="text" class="form-control blanco" name="name" aria-describedby="emailHelp" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Apellido Materno</label>
+                                <input formControlName="apellidoMaterno" type="text" class="form-control blanco" name="name" aria-describedby="emailHelp" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Fecha de nacimiento</label>
+                                <input formControlName="fechaNacimiento" type="date" class="form-control blanco" name="name" aria-describedby="emailHelp" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Género</label>
+                                <select formControlName="genero" class="form-control blanco">
+                                    <option>Seleccione un valor</option>
+                                    <option value="MASCULINO">Masculino</option>
+                                    <option value="FEMENINO">Femenino</option>
+                                  </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Correo</label>
+                                <input formControlName="email" type="email" class="form-control blanco" name="email" aria-describedby="emailHelp" required>
+                            </div>
+    
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Contraseña</label>
+                                <input formControlName="password" type="password" class="form-control blanco" name="password" aria-describedby="emailHelp" required>
+                            </div>
+                            <div class="form-group" *ngIf="forma.errors?.sonIguales && !forma.pristine">
+                                <p class="text-danger">
+                                    Las contraseñas deben de coincidir
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Confirme contraseña</label>
+                                <input formControlName="password2" type="password" class="form-control blanco" name="password2" aria-describedby="emailHelp" required>
+                            </div>
+                            <div class="form-group text-center p-b-20">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-warning btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" type="submit">Guardar</button>
+                                </div>
+                            </div>
+    
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div> -->

@@ -145,5 +145,21 @@ a {
     opacity: 0.6;
 }
 
+.live__scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.live__scroll .row {
+    display: block;
+}
+
+.live__scroll .live__scroll--box {
+    display: inline-block;
+    float: none;
+    padding: 15px;
+}
+
 
 /*# sourceMappingURL=style.css.map */

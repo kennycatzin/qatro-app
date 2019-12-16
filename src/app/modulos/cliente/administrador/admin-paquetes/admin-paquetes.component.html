@@ -1,1 +1,65 @@
-<p>admin-paquetes works!</p>
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input #input (keyup)="busqueda( input.value )" class="form-control" type="text" placeholder="Buscar paquete...">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12" *ngIf="cargando">
+    <div class="alert alert-warning text-center">
+        <strong>Cargando</strong>
+        <br>
+        <i class="fa fa-refresh fa-spin fa-2x"></i>
+        <br>
+        <span>Espere por favor</span>
+    </div>
+</div>
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <!-- <div class="text-right">
+                        <button data-toggle="modal" data-target=".bd-example-modal-lg" class="btn waves-effect waves-light btn-rounded btn-info">
+                        <i class="fa fa-plus">           
+                        </i>  Crear usuario</button>
+                    </div> -->
+                <h3 class="card-title">Paquetes registrados (<small>{{this.totalRegistros}}</small>)</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Clases</th>
+                            <th>Vigencia</th>
+                            <th>Precio Unitario</th>
+                            <th>Precio Total</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let obj of paquetes">
+                            <td>{{obj.nombre}}</td>
+                            <td>
+                                {{obj.numeroClases}}
+                            </td>
+                            <td>{{obj.vigencia}}</td>
+                            <td>
+                                {{obj.precioUnitario}}
+                            </td>
+                            <td>
+                                {{obj.precioUnitario * obj.numeroClases}}
+                            </td>
+                            <td class="text-center">
+                                <button (click)="actualizar(obj)" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-info"><i class="fa fa-save"></i></button>
+                                <button (click)="borrar(obj)" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                        </tr>
+                        <button (click)="cambiarDesde(-6)" class="btn btn-secondary m-auto">Anteriores</button>
+                        <button (click)="cambiarDesde(6)" class="btn btn-secondary m-auto">Siguientes</button>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

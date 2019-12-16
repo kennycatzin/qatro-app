@@ -24,6 +24,7 @@ import { AdminPaquetesComponent } from './administrador/admin-paquetes/admin-paq
 import { AdminDisciplinasComponent } from './administrador/admin-disciplinas/admin-disciplinas.component';
 import { AdminUsuariosComponent } from './administrador/admin-usuarios/admin-usuarios.component';
 import { PipesModule } from '../../pipes/pipes.module';
+import { ModalUploadComponent } from 'src/app/components/modal-upload/modal-upload.component';
 
 
 
@@ -47,6 +48,7 @@ import { PipesModule } from '../../pipes/pipes.module';
     AdminPaquetesComponent,
     AdminDisciplinasComponent,
     AdminUsuariosComponent,
+    ModalUploadComponent
 
   ],
   imports: [

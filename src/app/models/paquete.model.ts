@@ -1,7 +1,8 @@
 export class Paquete {
     constructor(
-        public numClases: number,
-        public precioUnit: number,
+        public nombre: string,
+        public numeroClases: number,
+        public precioUnitario: number,
         public vigencia: number,
         public _id?: string
     ) {
