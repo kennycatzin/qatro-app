@@ -3,7 +3,7 @@ import { CalendarioService } from 'src/app/services/service.index';
 import { URL_SERVICIOS } from '../../../../config/config';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { ActCalendario } from '../../../models/actCalendario.model';
+import { ApartarClase } from '../../../models/apartarClase.model';
 
 
 @Component({
@@ -19,7 +19,7 @@ clasesDisp = 0;
 totalRegistros = 0;
 desde = 0;
 existeId = '';
-fechaVenc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+fechaVenc = new Date().toJSON().slice(0 , 10).replace(/-/g, '/');
 objDisponibilidad: any = [];
 mivar = '';
 
@@ -58,14 +58,7 @@ mivar = '';
   kenny() {
     return URL_SERVICIOS;
   }
-  // getColor(variable: string) {
-  //   if (variable === '1') {
-  //     this.variable = 'text-white';
-  //   }
-  //   if (variable === '0') {
-  //     this.variable = 'text-muted';
-  //   }
-  // }
+
   apartarLugar(columna: number, posicion: number, varuno: string, vardos: string, variable: string, opcional: string) {
     console.log(posicion);
     console.log(columna);
@@ -73,7 +66,7 @@ mivar = '';
     console.log(vardos);
     console.log(variable);
     console.log(opcional);
-    let actCalendario = new ActCalendario(
+    let apartar = new ApartarClase(
       varuno,
       vardos,
       variable,
@@ -94,10 +87,18 @@ mivar = '';
           confirmButtonText: 'Si, cancelar el lugar'
         }).then((result) => {
           if (result.value) {
-            swal.fire(
-              'Lugar cancelado',
-              'success'
+            const apartar = new ApartarClase(
+              varuno,
+              vardos,
+              variable,
+              localStorage.getItem('id'),
+              posicion,
+              columna,
+              this.clasesDisp
             );
+            this.calendarioService.cancelarLugar(apartar)
+            .subscribe(resp => this.abrirModal(this.idClase));
+            this.traerDatos();
           }
         });
       }
@@ -127,7 +128,7 @@ mivar = '';
     }).then((result) => {
       console.log(result);
       if (result.value === true) {
-        let actCalendario = new ActCalendario(
+        const apartar = new ApartarClase(
           varuno,
           vardos,
           variable,
@@ -136,7 +137,7 @@ mivar = '';
           columna,
           this.clasesDisp
         );
-        this.calendarioService.apartarLugar(actCalendario)
+        this.calendarioService.apartarLugar(apartar)
         .subscribe(resp => this.abrirModal(this.idClase));
         this.traerDatos();
       }
@@ -149,7 +150,7 @@ console.log(numero);
 if (midesde >= this.totalRegistros) {
   return;
 }
-if (midesde < 0 ){
+if (midesde < 0 ) {
   return;
 }
 this.desde = this.desde + numero;

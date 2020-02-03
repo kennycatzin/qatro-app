@@ -1,0 +1,176 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input #input (keyup)="buscar( input.value )" class="form-control" type="text" placeholder="Buscar coach...">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="col-sm-12" *ngIf="cargando">
+    <div class="alert alert-warning text-center">
+        <strong>Cargando</strong>
+        <br>
+        <i class="fa fa-refresh fa-spin fa-2x"></i>
+        <br>
+        <span>Espere por favor</span>
+    </div>
+</div>
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-right">
+                    <button (click)="nuevo()" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn waves-effect waves-light btn-rounded btn-info">
+                        <i class="fa fa-plus">           
+                        </i>  Crear coaches</button>
+                </div>
+                <h3 class="card-title">Coaches registrados (<small>{{this.totalRegistros}}</small>)</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>tipo</th>
+
+                            <th class="text-center">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let obj of objeto">
+                            <td class="w70"><img data-toggle="modal" data-target="#cargaImagenes" (click)="hola(obj)" class="img-50 img-circle" src="{{ obj.img | imagen: 'coach' }}" alt=""></td>
+                            <td>{{obj.nombre}} {{obj.apellidoPaterno}} {{obj.apellidoMaterno}}</td>
+                            <td>{{obj.alias}}</td>
+                            <td class="text-center">
+                                <button (click)="actulizar(obj)" data-toggle="modal" data-target=".bd-example-modal-lg" class="btn btn-info"><i class="fas fa-edit"></i></button>
+                                <button (click)="borrar(obj)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                        <button (click)="cambiarDesde(-6)" class="btn btn-secondary m-auto">Anteriores</button>
+                        <button (click)="cambiarDesde(6)" class="btn btn-secondary m-auto">Siguientes</button>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="cargaImagenes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="car-body text-center">
+                            <h4 class="card-title">Fotografía del usuario</h4>
+                            <h6 class="card-subtitle">{{coachModify?.alias}}</h6>
+                            <img *ngIf="!imagenTemp" class="w150" [src]="coachModify?.img | imagen" alt="">
+                            <img *ngIf="imagenTemp" class="w150" [src]="imagenTemp" alt="">
+                            <input (change)="seleccionImagen( $event.target.files[0] )" type="file">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button (click)="traerDatos()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="button" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Módulo de coaches</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+            </div>
+            <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarCoach(f)">
+                <div class="modal-body">
+                    <div class="card-body blanco">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Nombres</label>
+                            <input [(ngModel)]="coach.nombre" name="nombre" type="text" class="form-control" placeholder="Ingrese los nombres">
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="formGroupExampleInput">Apellio paterno</label>
+                                <input [(ngModel)]="coach.apellidoPaterno" name="apellidoPaterno" type="text" class="form-control" placeholder="Ingrese el apellido paterno" required>
+                            </div>
+                            <div class="col">
+                                <label for="formGroupExampleInput">Apellido materno</label>
+                                <input [(ngModel)]="coach.apellidoMaterno" name="apellidoMaterno" type="text" class="form-control" placeholder="Ingrese el apellido materno" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <label for="formGroupExampleInput">Fecha de nacimiento</label>
+                                <input [(ngModel)]="coach.fechaNacimiento" name="fechaNacimiento" type="date" class="form-control" placeholder="Ingrese la fecha de nacimiento" required>
+                            </div>
+                            <div class="col">
+                                <label for="exampleFormControlSelect1">Género</label>
+                                <select [(ngModel)]="coach.genero" name="genero" class="form-control" data-show-icon="true" required>
+                                    <option value="">SELECCIONE UN GÉNERO</option> 
+                                    <option value="MASCULINO">Masculino</option>
+                                      <option value="FEMENINO">Femenino</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Direccion</label>
+                            <input [(ngModel)]="coach.direccion" name="direccion" type="text" class="form-control" placeholder="Ingrese la dirección" required>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="formGroupExampleInput">Correo</label>
+                                <input [(ngModel)]="coach.correo" name="correo" type="text" class="form-control" placeholder="Ingrese el correo" required>
+                            </div>
+                            <div class="col">
+                                <label for="formGroupExampleInput">Alias</label>
+                                <input [(ngModel)]="coach.alias" name="alias" type="text" class="form-control" placeholder="" required>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="formGroupExampleInput">Facebook</label>
+                                <input [(ngModel)]="coach.facebook" name="facebook" type="text" class="form-control" placeholder="">
+                            </div>
+                            <div class="col">
+                                <label for="formGroupExampleInput">Instagram</label>
+                                <input [(ngModel)]="coach.instagram" name="instagram" type="text" class="form-control" placeholder="">
+                            </div>
+                            <div class="col">
+                                <label for="formGroupExampleInput">Twitter</label>
+                                <input [(ngModel)]="coach.twitter" name="twitter" type="text" class="form-control" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Frase</label>
+                            <textarea [(ngModel)]="coach.frase" name="frase" name="descripcion" class="form-control rounded-0" rows="3" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <button (click)="nuevo()" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

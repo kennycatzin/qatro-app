@@ -2,9 +2,9 @@
     <div class="col-lg-8 mx-auto">
         <div class="xs-section-heading2 text-center">
             <h2>Calendario de <span>disciplinas</span></h2>
-            <p class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Clases disponibles   <span class="label label-rouded label-success pull-right ml-2 mt-1">{{ clasesDisp }}</span></span>
+            <p class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i>Clases disponibles <span class="label label-rouded label-success pull-right ml-2 mt-1">{{clasesDisp}}</span>
             </p> <br>
-            <p class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-calendar"></i><span class="hide-menu">Fecha de vencimiento  <span class="label label-rouded label-info pull-right ml-2 mt-1">{{ fechaVenc }}</span></span>
+            <p class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-calendar"></i>Fecha de vencimiento <span class="label label-rouded label-info pull-right ml-2 mt-1">{{ fechaVenc | date:'yyyy-MM-dd' }}</span>
             </p>
         </div>
     </div>
@@ -25,17 +25,17 @@
 </div>
 
 <div class="live__scroll">
-    <div class="row text-center">
-        <div *ngFor="let calendario of objCalendario" class="col-md-2 text-center live__scroll--box">
+    <div class="row text-center align-items-lg-center">
+        <div *ngFor="let calendario of objCalendario" class="col-md-2  align-self-start live__scroll--box">
             <h3 class="text-white">{{calendario.dia}}</h3>
-            <h5 class="naranja">{{calendario.fecha| date:'yyyy-MM-dd'}}</h5>
+            <h5 class="naranja">{{calendario.fecha | date:'dd-MM-yyyy':'UTC' }}</h5>
             <div *ngFor="let obj of calendario.clases" class="card text-white bg-dark mb-1 punto mx-auto" style="max-width: 18rem;">
                 <a data-toggle="modal" (click)="abrirModal(obj._id)" data-target=".bd-example-modal-lg">
-                    <div class="card-header text-center">{{obj.coach_id.alias}}</div>
+                    <div class="card-header text-center">{{obj.coachId.alias}}</div>
                     <div class="card-body">
-                        <h5 class="card-title text-center naranja">{{obj.disciplina_id.nombre}}</h5>
+                        <h5 class="card-title text-center naranja h-5">{{obj.disciplinaId.nombre}}</h5>
                         <p class="card-text text-center"><small>{{obj.horario}}</small></p>
-                        <i class="fas fa-map-marker-alt"></i>
+                        <i class="{{obj.disciplinaId.tipo}}"></i>
                     </div>
                 </a>
             </div>
@@ -60,13 +60,13 @@
                             <div class="card align-middle negro">
                                 <div class="card text-center bg-dark">
                                     <div class="card-body ">
-                                        <h5 class="card-title naranja">{{obj.disciplina_id.nombre}}</h5>
+                                        <h5 class="card-title naranja">{{obj.disciplinaId.nombre}}</h5>
                                         <h5 class="card-title text-success">{{obj.horario}}</h5>
 
                                         <ul _ngcontent-ubd-c6="" class="list-inline soc-pro m-t-30 text-center text-white">
-                                            <li aria-disabled=""> <a class="waves-effect waves-dark" routerLinkActive="active" aria-expanded="false"><i class="{{obj.icono}} naranja"></i><span class="hide-menu">Disponible</span></a></li>
-                                            <li> <a class="waves-effect waves-dark" routerLinkActive="active" aria-expanded="false"><i class="{{obj.icono}} text-muted"></i><span class="hide-menu">Ocupado</span></a></li>
-                                            <li> <a class="waves-effect waves-dark" routerLinkActive="active" aria-expanded="false"><i class="{{obj.icono}}"></i><span class="hide-menu">Coach</span></a></li>
+                                            <li aria-disabled=""> <a class="waves-effect waves-dark" routerLinkActive="active" aria-expanded="false"><i class="{{obj.disciplinaId.tipo}} naranja"></i><span class="hide-menu">Coach</span></a></li>
+                                            <li> <a class="waves-effect waves-dark" routerLinkActive="active" aria-expanded="false"><i class="{{obj.disciplinaId.tipo}} text-muted"></i><span class="hide-menu">Ocupado</span></a></li>
+                                            <li> <a class="waves-effect waves-dark" routerLinkActive="active" aria-expanded="false"><i class="{{obj.disciplinaId.tipo}}"></i><span class="hide-menu">Disponible</span></a></li>
                                         </ul>
                                         <h5 class="card-title text-white">Elige tu lugar</h5>
                                     </div>
@@ -76,7 +76,7 @@
                                         <li class="gg">
 
                                             <a>
-                                                <i class="fa fa-hand-rock-o text-white"></i>
+                                                <i class="{{obj.disciplinaId.tipo}} naranja"></i>
                                             </a>
                                         </li>
 
@@ -88,7 +88,7 @@
 
 
                                             <a (click)="apartarLugar(col.posicion, col.fila, obj._id,esp._id,col._id, col.usuario_id)">
-                                                <i class="{{obj.icono}} naranja {{col.color}}" [ngClass]="{'text-info': col.usuario_id==existeId}"></i>
+                                                <i class="{{obj.disciplinaId.tipo}} text-white {{col.color}}" [ngClass]="{'text-warning': col.usuario_id==existeId}"></i>
                                             </a>
                                         </li>
                                     </ul>
@@ -99,9 +99,9 @@
                             <div class="col-sm-6">
                                 <div class="card bg-dark">
                                     <div class="card-body">
-                                        <img src="{{ kenny() }}/uploads/coaches/{{obj.coach_id.img}}" width="30%" class="card-img-top" alt="...">
+                                        <img src="{{obj.coachId.img | imagen: 'coach'}}" width="30%" class="card-img-top" alt="...">
 
-                                        <h5 class="card-title naranja">{{obj.coach_id.alias}}</h5>
+                                        <h5 class="card-title naranja">{{obj.coachId.alias}}</h5>
 
                                     </div>
                                 </div>
@@ -109,9 +109,9 @@
                             <div class="col-sm-6">
                                 <div class="card bg-dark">
                                     <div class="card-body">
-                                        <img src="{{ kenny() }}/uploads/disciplinas/{{obj.disciplina_id.img}}" width="2%" height="2%" class="card-img-top" alt="...">
+                                        <img src="{{obj.disciplinaId.img | imagen: 'disciplinas'}}" width="2%" height="2%" class="card-img-top" alt="...">
 
-                                        <h5 class="card-title naranja">{{obj.disciplina_id.nombre}}</h5>
+                                        <h5 class="card-title naranja text-center">{{obj.disciplinaId.nombre}}</h5>
 
                                     </div>
                                 </div>

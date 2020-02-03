@@ -1,12 +1,10 @@
+import { ActClases } from './actClases.model';
 export class ActCalendario {
     constructor(
-        public claseId: string,
-        public espacioId: string,
-        public columnaId: string,
-        public usuarioId: string,
-        public espacio: number,
-        public columna: number,
-        public clasesDisp: number
-    ) {
-    }
+        public id: string,
+        public dia: string,
+        public fecha: string,
+        public clases: ActClases[]
+    ) {}
+
 }

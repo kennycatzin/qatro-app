@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from 'src/app/services/service.index';
 import swal from 'sweetalert2';
 import { Usuario } from 'src/app/models/usuario.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-usuarios',
@@ -10,6 +11,7 @@ import { Usuario } from 'src/app/models/usuario.model';
 })
 export class AdminUsuariosComponent implements OnInit {
   objUsuarios: Usuario[] = [];
+  usuario: Usuario = new Usuario('', '', '', '', '', '', '', '', '', '', '');
   totalUsuarios = 0;
   desde = 0;
   cargando = false;
@@ -107,5 +109,29 @@ export class AdminUsuariosComponent implements OnInit {
       console.log(usuario);
       this.usuarioService.actualizarUsuario(usuario)
       .subscribe();
+  }
+  guardarUsuario(f: NgForm) {
+    console.log(f);
+    if ( f.invalid ) {
+      return;
+    }
+    console.log(this.usuario);
+    if (this.usuario._id) {
+      this.usuarioService.actualizarUsuario(this.usuario)
+      .subscribe( objeto => {
+        console.log(objeto);
+        this.traerDatos();
+      });
+    } else {
+      this.usuarioService.crearUsuario( this.usuario )
+      .subscribe( objeto => {
+        console.log(objeto);
+        this.nuevo();
+        this.traerDatos();
+      });
+    }
+  }
+  nuevo() {
+    this.usuario = new Usuario('', '', '', '', '', '', '', '', '', '', '');
   }
 }

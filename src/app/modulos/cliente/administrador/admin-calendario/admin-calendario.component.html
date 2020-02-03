@@ -1,1 +1,295 @@
-<p>admin-calendario works!</p>
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="xs-section-heading2 text-center">
+            <h2>Calendario de <span>disciplinas</span></h2>
+            <button (click)="nuevo()" data-toggle="modal" data-target="#calendario" class="btn btn-success btn-block"><i class="fas fa-calendar-plus"></i>
+
+                Agregar Clase</button>
+            <br>
+            <p class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-calendar"></i>Fecha de hoy <span class="label label-rouded label-info pull-right ml-2 mt-1">{{ fechaVenc | date:'yyyy-MM-dd' }}</span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <button (click)="cambiarDesde(-6)" class="btn btn-secondary">Anteriores</button>
+            </li>
+
+            <li class="page-item">
+                <button (click)="cambiarDesde(6)" class="btn btn-warning">Siguientes</button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="live__scroll">
+    <div class="row text-center align-items-lg-center">
+        <div *ngFor="let calendario of objCalendario" class="col-md-2  align-self-start live__scroll--box">
+            <h3 class="text-white">{{calendario.dia}}</h3>
+            <h5 class="naranja">{{calendario.fecha | date:'dd-MM-yyyy':'UTC' }}</h5>
+            <div *ngFor="let obj of calendario.clases" class="card text-white bg-dark mb-1 punto mx-auto" style="max-width: 18rem;">
+                <a data-toggle="modal" (click)="abrirModal(obj._id)" data-target=".bd-example-modal-lg">
+                    <div class="card-header text-center">{{obj.coachId.alias}}</div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center naranja h-5">{{obj.disciplinaId.nombre}}</h5>
+                        <p class="card-text text-center"><small>{{obj.horario}}</small></p>
+                        <i class="{{obj.disciplinaId.tipo}}"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content negro">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Seleccione su lugar </h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                </div>
+                <div *ngFor="let clase of objClase" class="modal-body text-white text-center">
+
+                    <tr *ngFor="let obj of clase.clases">
+                        <div class="col-12 bg-dark pb-1">
+
+                            <div class="card align-middle negro">
+                                <div class="card text-center bg-dark">
+                                    <div class="card-body ">
+                                        <h5 class="card-title naranja">{{obj.disciplinaId.nombre}}</h5>
+                                        <h5 class="card-title text-success">{{obj.horario}}</h5>
+
+                                        <ul _ngcontent-ubd-c6="" class="list-inline soc-pro m-t-30 text-center text-white">
+                                            <li aria-disabled=""> <a class="waves-effect waves-dark" routerLinkActive="active" aria-expanded="false"><i class="{{obj.disciplinaId.tipo}} naranja"></i><span class="hide-menu">Coach</span></a></li>
+                                            <li> <a class="waves-effect waves-dark" routerLinkActive="active" aria-expanded="false"><i class="{{obj.disciplinaId.tipo}} text-muted"></i><span class="hide-menu">Ocupado</span></a></li>
+                                            <li> <a class="waves-effect waves-dark" routerLinkActive="active" aria-expanded="false"><i class="{{obj.disciplinaId.tipo}}"></i><span class="hide-menu">Disponible</span></a></li>
+                                        </ul>
+                                        <h5 class="card-title text-white">Elige tu lugar</h5>
+                                        <button data-toggle="modal" data-target="#calendario" class="btn btn-info" data-dismiss="modal"><i class="fas fa-edit"></i>Editar</button>
+
+                                    </div>
+                                </div>
+                                <div class="card-body col-12">
+                                    <ul _ngcontent-ubd-c6="" class="list-inline soc-pro  text-center text-warning">
+                                        <li class="gg">
+
+                                            <a>
+                                                <i class="{{obj.disciplinaId.tipo}} naranja"></i>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                    <ul *ngFor="let esp of obj.espacios" _ngcontent-ubd-c6="" class="list-inline soc-pro  text-center text-warning">
+
+
+                                        <li *ngFor="let col of esp.columnas" class="gg">
+                                            <!-- (click)="apartarLugar(col.posicion, col.fila, obj._id,esp._id,col._id, col.usuario_id)" -->
+
+                                            <a (click)="apartarLugar(col.posicion, col.fila, obj._id,esp._id,col._id, col.usuario_id)">
+                                                <i class="{{obj.disciplinaId.tipo}} text-white {{col.color}}"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="card bg-dark">
+                                    <div class="card-body">
+                                        <img src="{{ obj.coachId.img|imagen:'coach' }}" width="30%" class="card-img-top" alt="...">
+
+                                        <h5 class="card-title naranja">{{obj.coachId.alias}}</h5>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="card bg-dark">
+                                    <div class="card-body">
+                                        <img src="{{ obj.disciplinaId.img | imagen:'disciplina'}}" width="2%" height="2%" class="card-img-top" alt="...">
+
+                                        <h5 class="card-title naranja">{{obj.disciplinaId.nombre}}</h5>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+                    </tr>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<button id="openModalButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" hidden>
+    Launch demo modal
+  </button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Reserva de lugares</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <div class="row animated fadeIn">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <input #input (keyup)="busquedaUsuario( input.value )" class="form-control" type="text" placeholder="Buscar usuario...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12" *ngIf="cargando">
+                    <div class="alert alert-warning text-center">
+                        <strong>Cargando</strong>
+                        <br>
+                        <i class="fa fa-refresh fa-spin fa-2x"></i>
+                        <br>
+                        <span>Espere por favor</span>
+                    </div>
+                </div>
+                <div class="row animated fadeIn" *ngIf="!cargando">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Correo</th>
+                                            <th>Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let obj of usuarios">
+                                            <td>{{obj.name}} {{ obj.apellidoPaterno }} {{ obj.apellidoMaterno }}</td>
+
+                                            <td>{{obj.email}}</td>
+
+                                            <td class="text-center">
+                                                <button (click)="apartar(obj)" class="btn btn-warning" data-dismiss="modal"><i class="fas fa-sign-out-alt"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" id="calendario" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content negro">
+            <div class="modal-header">
+                <h5 class="modal-title text-white">Crear calendario </h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+            </div>
+            <form #f="ngForm" ngNativeValidate>
+                <div class="modal-body">
+                    <div class="card-body blanco">
+                        <div class="row">
+                            <div class="col">
+                                <label for="formGroupExampleInput">Fecha</label>
+                                <input [disabled]="disabled" [(ngModel)]="miCalendario.fecha" name="fecha" type="date" class="form-control" required>
+                            </div>
+                            <div class="col">
+                                <label for="formGroupExampleInput">Horario</label>
+                                <input [(ngModel)]="clases.horario" name="horario" type="time" class="form-control" placeholder="Ingrese el apellido materno" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="formGroupExampleInput">Coach</label>
+                                <select [(ngModel)]="clases.coachId" name="coach" class="form-control">
+                                    <option value="">SELECCIONE UN COACH</option>
+
+                                    <option *ngFor="let coach of coaches" [value]="coach._id">
+                                        {{coach.alias}}
+                                    </option>
+                                  
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="formGroupExampleInput">Coach</label>
+                                <select [(ngModel)]="clases.disciplinaId" name="disciplina" class="form-control">
+                                    <option value="">SELECCIONE UNA DISCIPLINA</option>
+
+                                    <option *ngFor="let disciplina of disciplinas" [value]="disciplina._id">
+                                        {{disciplina.nombre}}
+                                    </option>
+                                  
+                                </select>
+                            </div>
+                        </div><br>
+                        <button (click)="disab()" class="btn btn-info btn-block"><i class="fas fa-plus"></i>Agregar</button>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Disciplina</th>
+                                <th>Coach</th>
+                                <th>Horario</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let obj of objClases; let i = index">
+                                <td>{{obj.coachId}}</td>
+
+                                <td>{{obj.disciplinaId}}</td>
+
+                                <td class="text-center">
+                                    {{obj.horario}}
+                                </td>
+                                <td class="text-center">
+                                    <!-- <button data-target=".bd-example-modal-lg" class="btn btn-info"><i class="fas fa-edit"></i></button> -->
+                                    <button (click)="delItem( i+1 )" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button (click)="guardarCalendario()" type="submit" class="btn btn-success" data-dismiss="modal">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

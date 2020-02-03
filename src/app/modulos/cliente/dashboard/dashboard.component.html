@@ -7,13 +7,13 @@
     </div>
 </div>
 <div class="row">
-    <div *ngFor="let obj of objDisciplinas" class="col-lg-4">
+    <div *ngFor="let obj of objDisciplinas" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
         <div class="card negro">
             <a [routerLink]="['/calendario']">
                 <div class="xs-section-heading2 text-center">
                     <h2>{{ obj.nombre }}</h2>
                 </div>
-                <img src="{{ kenny() }}/uploads/disciplinas/{{obj.img}}" alt="Avatar" class="image" style="width:100%">
+                <img src="{{ obj.img | imagen: 'disciplina'}}" alt="Avatar" class="image" style="width:100%">
                 <div class="middle">
                     <div class="text">{{ obj.descripcion }}</div>
                 </div>

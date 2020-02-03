@@ -148,7 +148,7 @@ a {
 .live__scroll {
     overflow-x: auto;
     overflow-y: hidden;
-    white-space: nowrap;
+    white-space: normal;
 }
 
 .live__scroll .row {

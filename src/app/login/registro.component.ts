@@ -63,7 +63,7 @@ export class RegistroComponent implements OnInit {
       this.forma.value.genero,
       this.forma.value.email,
       this.forma.value.password,
-      'https://qatro-server.herokuapp.com/assets/no-img.jpg'
+      'xxx.jpg'
     );
     this.usuarioService.crearUsuario(usuario)
     .subscribe(resp => this.router.navigate(['/login']));

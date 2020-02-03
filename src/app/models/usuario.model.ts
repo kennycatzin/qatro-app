@@ -3,7 +3,7 @@ export class Usuario {
         public name: string,
         public apellidoPaterno?: string,
         public apellidoMaterno?: string,
-        public fechaNacimiento?: Date,
+        public fechaNacimiento?: string,
         public genero?: string,
         public email?: string,
         public password?: string,

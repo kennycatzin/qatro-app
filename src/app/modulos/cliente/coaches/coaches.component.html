@@ -15,20 +15,20 @@
 
 
 <div class="row">
-    <div *ngFor="let obj of objCoaches" class="col-lg-3">
+    <div *ngFor="let obj of objCoaches" class="col-lg-3 col-md-4 col-sm-3 col-xs-12">
         <div class="card negro">
-            <img src="{{ kenny() }}/uploads/coaches/{{obj.img}}" width="50%" height="300" class="card-img-top" alt="...">
+            <img src="{{obj.img | imagen: 'coach'}}" width="50%" height="300" class="card-img-top" alt="...">
             <div class="card-body">
                 <div class="card-body ">
                     <h5 class="oran">{{ obj.alias }}</h5>
                     <p class="card-text ">{{ obj.frase }}</p>
                     <ul _ngcontent-ubd-c6="" class="list-inline soc-pro m-t-30 text-center text-warning">
-                        <li _ngcontent-ubd-c6=""><a _ngcontent-ubd-c6="" href="{{ obj.twitter }}"><i _ngcontent-ubd-c6="" class="fa fa-twitter text-white"></i></a></li>
-                        <li _ngcontent-ubd-c6=""><a _ngcontent-ubd-c6="" href="{{ obj.facebook }}"><i _ngcontent-ubd-c6="" class="fa fa-facebook-square text-white"></i></a></li>
-                        <li _ngcontent-ubd-c6=""><a _ngcontent-ubd-c6="" href="{{ obj.instagram }}"><i _ngcontent-ubd-c6="" class="fa fa-instagram text-white"></i></a></li>
+                        <li _ngcontent-ubd-c6=""><a _ngcontent-ubd-c6="" href="{{ obj.twitter }}"><i _ngcontent-ubd-c6="" class="fab fa-twitter text-white"></i></a></li>
+                        <li _ngcontent-ubd-c6=""><a _ngcontent-ubd-c6="" href="{{ obj.facebook }}"><i _ngcontent-ubd-c6="" class="fab fa-facebook text-white"></i></a></li>
+                        <li _ngcontent-ubd-c6=""><a _ngcontent-ubd-c6="" href="{{ obj.instagram }}"><i _ngcontent-ubd-c6="" class="fab fa-instagram text-white"></i></a></li>
                     </ul>
 
-                    <button class="btn-warning btn-block">Ver más</button>
+                    <!-- <button class="btn-warning btn-block">Ver más</button> -->
                 </div>
             </div>
 

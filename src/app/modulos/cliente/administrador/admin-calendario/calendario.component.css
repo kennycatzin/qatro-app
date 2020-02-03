@@ -1,0 +1,169 @@
+.container {
+    position: relative;
+    width: 50%;
+}
+
+.image {
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.card:hover .image {
+    opacity: 0.3;
+}
+
+.card:hover .middle {
+    opacity: 50;
+}
+
+.text {
+    background-color: rgba(255, 137, 3, .2);
+    color: white;
+    font-size: 13px;
+    padding: 16px 32px;
+}
+
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 0;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
+    /* Black see-through */
+    color: #f1f1f1;
+    width: 100%;
+    transition: .5s ease;
+    opacity: 0;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.container:hover .overlay {
+    opacity: 1;
+}
+
+.negro {
+    background-color: #1D2124;
+}
+
+.xs-section-heading,
+.xs-section-heading2 {
+    margin-bottom: 70px;
+    color: #666565;
+}
+
+.xs-section-heading h2 span,
+.xs-section-heading2 h2 span {
+    color: #EE784A;
+}
+
+.xs-section-heading p,
+.xs-section-heading2 p {
+    font-size: 1.125rem;
+}
+
+.xs-section-heading2 h2,
+.xs-section-heading2 p {
+    color: #FFFFFF;
+}
+
+.xs-services-intro .xs-section-heading,
+.xs-services-intro .xs-section-heading2 {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.xs-help .xs-section-heading,
+.xs-help .xs-section-heading2 {
+    margin-bottom: 0;
+}
+
+.xs-contact-form .xs-section-heading,
+.xs-dark-shadow .xs-section-heading,
+.xs-contact-form .xs-section-heading2,
+.xs-dark-shadow .xs-section-heading2 {
+    margin-bottom: 0;
+}
+
+.xs-contact-form .xs-section-heading p,
+.xs-dark-shadow .xs-section-heading p,
+.xs-contact-form .xs-section-heading2 p,
+.xs-dark-shadow .xs-section-heading2 p {
+    font-size: 1rem;
+}
+
+.xs-cta .xs-section-heading,
+.xs-cta .xs-section-heading2,
+.xs-cta h2 {
+    margin: 0;
+}
+
+.punto {
+    cursor: pointer;
+}
+
+.naranja {
+    color: #EE784A;
+}
+
+.negro {
+    background-color: #1D2124;
+}
+
+.gg {
+    font-size: 30px;
+}
+
+a {
+    cursor: pointer;
+}
+
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.live__scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: normal;
+}
+
+
+/* white-space: nowrap; */
+
+.live__scroll .row {
+    display: block;
+}
+
+.live__scroll .live__scroll--box {
+    display: inline-block;
+    float: none;
+    padding: 15px;
+    top: 50%;
+}
+
+
+/*# sourceMappingURL=style.css.map */

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ActCalendario } from '../../models/actCalendario.model';
+import { ApartarClase } from '../../models/apartarClase.model';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../../config/config';
 import { map, catchError } from 'rxjs/operators';
 import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
+import { ActCalendario } from '../../models/actCalendario.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -46,29 +47,25 @@ export class CalendarioService {
       return Observable.throw(err);
     }));
   }
-  asd( actCal: ActCalendario ) {
-    console.log('llegueeeeee');
+  asd( actCal: ApartarClase ) {
     let url = URL_SERVICIOS + '/calendario/actualizar';
-    console.log(url);
-
-    console.log(actCal);
     return this.http.post( url, actCal )
     .pipe(map( (resp: any) => {
       swal.fire(
         'Lugar apartado',
-        'Recuerda que tienes 12 horas para cancelar la clase',
+        'Recuerda que son 12 horas para cancelar la clase',
         'success'
       );
       return false;
     }));
     }
-    apartarLugar( actCal: ActCalendario) {
+    apartarLugar( apartar: ApartarClase) {
     let url = URL_SERVICIOS + '/calendario/actualizar';
-    return this.http.put( url, actCal )
+    return this.http.put( url, apartar )
     .pipe(map( (resp: any) => {
       swal.fire(
         'Lugar apartado',
-        'Recuerda que tienes 12 horas para cancelar la clase, Favor de revisar correo de confirmación',
+        'Recuerda que son 12 horas para cancelar la clase, Favor de revisar correo de confirmación',
         'success'
       );
       return true;
@@ -77,5 +74,31 @@ export class CalendarioService {
       return Observable.throw(err);
     }));
     }
- 
+    cancelarLugar( apartar: ApartarClase) {
+      let url = URL_SERVICIOS + '/calendario/cancelar';
+      return this.http.put( url, apartar )
+      .pipe(map( (resp: any) => {
+        swal.fire(
+          'Lugar cancelado',
+          '',
+          'success'
+        );
+        return true;
+      }), catchError(err => {
+        swal.fire('Ha ocurrido un error',  'No se pudo cargar la clase', 'error');
+        return Observable.throw(err);
+      }));
+      }
+ guardarCalendario(calendario: ActCalendario) {
+  let url = URL_SERVICIOS + '/calendario';
+  return this.http.post( url, calendario )
+  .pipe(map( (resp: any) => {
+    swal.fire(
+      'Calendario Creado',
+      '',
+      'success'
+    );
+    return false;
+  }));
+ }
 }

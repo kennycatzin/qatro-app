@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { ImagenPipe } from './imagen.pipe';
+import { DateFormatPipe } from './fecha.pipe';
 
 @NgModule({
-  declarations: [ ImagenPipe],
+  declarations: [ ImagenPipe, DateFormatPipe],
   imports: [
   ],
   exports: [
-    ImagenPipe
+    ImagenPipe,
+    DateFormatPipe
   ]
 })
 export class PipesModule { }
