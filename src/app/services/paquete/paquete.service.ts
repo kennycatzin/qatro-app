@@ -11,7 +11,7 @@ import { CargarPaquete } from 'src/app/models/cargarPaquete.model';
   providedIn: 'root'
 })
 export class PaqueteService {
-  paquete: Paquete;
+  usuario: Paquete;
   token: string;
   cargarPaquete: CargarPaquete;
 
@@ -19,24 +19,13 @@ export class PaqueteService {
             ) {
   }
 
-  getPaquetesAdmin(desde: number) {
-    let url = URL_SERVICIOS + '/paquete/admin?desde=' + desde;
-    return this.http.get(url);
-  }
-
-
 
   getPaquetes() {
     let url = URL_SERVICIOS + '/paquete';
     return this.http.get(url);
   }
 
-  busqueda( nombre: string ) {
-    let url = URL_SERVICIOS + '/busqueda/coleccion/paquetes/' + nombre;
-    return this.http.get(url)
-            .pipe(map((resp: any) => resp.paquetes));
 
-  }
   crearPaquete( paquete: Paquete) {
     let url = URL_SERVICIOS + '/paquete';
     return this.http.post( url, paquete )
@@ -45,13 +34,25 @@ export class PaqueteService {
         return resp.paquete;
       }));
     }
-
+    busqueda( nombre: string ) {
+      let url = URL_SERVICIOS + '/busqueda/coleccion/paquetes/' + nombre;
+      return this.http.get(url)
+              .pipe(map((resp: any) => resp.coaches));
+  
+    }
+    getPaquetesAdmin(desde: number) {
+      let url = URL_SERVICIOS + '/paquete/admin?desde=' + desde;
+      return this.http.get(url);
+    }
     borrar(id: string) {
       let url = URL_SERVICIOS + '/paquete/' + id;
       return this.http.delete(url)
       .pipe(map((resp: any) => {
         swal.fire('Registro eliminado', 'El registro se ha eliminado correctamente', 'success');
         return true;
+        swal.fire('Paquete creado exitósamente', 'success');
+        return resp.usuario;
+
       }));
     }
 

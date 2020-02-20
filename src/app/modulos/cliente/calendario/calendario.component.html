@@ -24,6 +24,7 @@
     </nav>
 </div>
 
+<<<<<<< HEAD
 <div class="live__scroll">
     <div class="row text-center align-items-lg-center">
         <div *ngFor="let calendario of objCalendario" class="col-md-2  align-self-start live__scroll--box">
@@ -39,10 +40,31 @@
                     </div>
                 </a>
             </div>
-        </div>
-    </div>
-</div>
+=======
+
+
+
 <div class="row">
+    <div *ngFor="let calendario of objCalendario" class="col-md-2 text-center">
+        <h3 class="text-white">{{calendario.dia}}</h3>
+        <h5 class="naranja">{{calendario.fecha| date:'yyyy-MM-dd'}}</h5>
+
+        <div *ngFor="let obj of calendario.clases" class="card text-white bg-dark mb-1 punto mx-auto" style="max-width: 18rem;">
+            <a data-toggle="modal" (click)="abrirModal(obj._id)" data-target=".bd-example-modal-lg">
+                <div class="card-header text-center">{{obj.coach_id.alias}}</div>
+                <div class="card-body">
+                    <h5 class="card-title text-center naranja">{{obj.disciplina_id.nombre}}</h5>
+                    <p class="card-text text-center"><small>{{obj.horario}}</small></p>
+                    <i class="fas fa-map-marker-alt"></i>
+
+                </div>
+            </a>
+>>>>>>> parent of 85afa964... qatro-app
+        </div>
+
+    </div>
+
+
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content negro">

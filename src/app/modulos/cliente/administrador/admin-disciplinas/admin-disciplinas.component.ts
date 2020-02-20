@@ -10,9 +10,10 @@ import { NgForm } from '@angular/forms';
   styles: []
 })
 export class AdminDisciplinasComponent implements OnInit {
+
   objeto: Disciplina[];
 
-disciplina: Disciplina = new Disciplina('', '', '', '', '');
+disciplina: Disciplina = new Disciplina('', '', '', '');
 disciplinaModify: Disciplina;
 totalRegistros = 0;
   disciplinaId = '';
@@ -39,7 +40,7 @@ totalRegistros = 0;
   }
   traerDatos() {
     this.cargando = true;
-    this.disciplinaService.getDisciplinas(this.desde)
+    this.disciplinaService.getDisciplinaAdmin(this.desde)
     .subscribe( (data: any) => {
       console.log(data);
       this.objeto = data.disciplinas;
@@ -130,6 +131,6 @@ guardarDisciplina(f: NgForm) {
   }
 }
 nuevo() {
-  this.disciplina = new Disciplina('', '', '', '', '');
+  this.disciplina = new Disciplina('', '', '', '');
 }
 }

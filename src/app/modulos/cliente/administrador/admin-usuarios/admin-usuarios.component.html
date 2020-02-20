@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <input #input (keyup)="buscarUsuario( input.value )" class="form-control" type="text" placeholder="Buscar usuario...">
+                <input #input (keyup)="busqueda( input.value )" class="form-control" type="text" placeholder="Buscar paquete...">
             </div>
 
         </div>
@@ -10,16 +10,7 @@
     </div>
 
 </div>
-<div class="col-sm-12" *ngIf="cargando">
-    <div class="alert alert-warning text-center">
-        <strong>Cargando</strong>
-        <br>
-        <i class="fa fa-refresh fa-spin fa-2x"></i>
-        <br>
-        <span>Espere por favor</span>
-    </div>
-</div>
-<div class="row animated fadeIn" *ngIf="!cargando">
+<div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -29,47 +20,49 @@
                     </i>  Crear usuario</button>
                 </div>
                 <h3 class="card-title">Usuarios registrados (<small>{{this.totalUsuarios}}</small>)</h3>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Foto</th>
-                            <th>Nombre</th>
-                            <th>F. Nacimiento</th>
-                            <th>Correo</th>
-                            <th>Rol</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let obj of objUsuarios">
-                            <td class="w70"><img data-toggle="modal" data-target="#cargaImagenes" (click)="hola(obj)" class="img-50 img-circle" src="{{ obj.img | imagen: 'usuario' }}" alt=""></td>
-                            <td>{{obj.name}} {{ obj.apellidoPaterno }} {{ obj.apellidoMaterno }}</td>
-                            <td>
-                                {{obj.fechaNacimiento| date:'yyyy-MM-dd'}}
-                            </td>
-                            <td>{{obj.email}}</td>
-                            <td>
-                                <select [(ngModel)]="obj.role" name="role" class="form-control">
+            </div>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Rol</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let obj of objUsuarios">
+                        <td class="w70"><img data-toggle="modal" data-target="#cargaImagenes" (click)="hola(obj)" class="img-50 img-circle" src="{{ obj.img | imagen: 'usuario' }}" alt=""></td>
+                        <td>{{obj.name}} {{ obj.apellidoPaterno }} {{ obj.apellidoMaterno }}</td>
+                        <td>{{obj.email}}</td>
+                        <td>
+                            <select [(ngModel)]="obj.role" name="role" class="form-control">
                                     <option value="CLIENT_ROLE">CLIENTE</option>
                                     <option value="ADMIN_ROLE">ADMINISTRADOR</option>
                                     <option value="SELLER_ROLE">VENDEDOR</option>
                                 </select>
 
-                            </td>
-                            <td class="text-center">
-                                <button (click)="actulizarUsuario(obj)" class="btn btn-info"><i class="fas fa-save"></i></button>
-                                <button (click)="borrarUsuario(obj)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                            </td>
-                        </tr>
-                        <button (click)="cambiarDesde(-6)" class="btn btn-secondary m-auto">Anteriores</button>
-                        <button (click)="cambiarDesde(6)" class="btn btn-secondary m-auto">Siguientes</button>
+                        </td>
+                        <td class="text-center">
+                            <button (click)="actulizarUsuario(obj)" class="btn btn-info"><i class="fas fa-save"></i></button>
+                            <button (click)="borrarUsuario(obj)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
 
-                    </tbody>
-                </table>
-            </div>
+                    </tr>
+
+                </tbody>
+            </table>
+            <button (click)="cambiarDesde(-6)" class="btn btn-secondary m-auto">Anteriores</button>
+            <button (click)="cambiarDesde(6)" class="btn btn-secondary m-auto">Siguientes</button>
         </div>
+
     </div>
+
 </div>
+
+
+
 
 <div class="modal fade" id="cargaImagenes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -101,86 +94,85 @@
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Módulo de usuarios</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Módulo de usuarios</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
-            <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarUsuario(f)">
-                <div class="modal-body">
-                    <div class="card-body blanco">
-                        <div class="form-group">
-                            <label for="formGroupExampleInput">Nombres</label>
-                            <input [(ngModel)]="usuario.name" name="name" type="text" class="form-control" placeholder="Ingrese los nombres" required>
-                        </div>
+                </div>
+                <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarUsuario(f)">
+                    <div class="modal-body">
+                        <div class="card-body blanco">
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Nombres</label>
+                                <input [(ngModel)]="usuario.name" name="name" type="text" class="form-control" placeholder="Ingrese los nombres" required>
+                            </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <label for="formGroupExampleInput">Apellio paterno</label>
-                                <input [(ngModel)]="usuario.apellidoPaterno" name="apellidoPaterno" type="text" class="form-control" placeholder="Ingrese el apellido paterno" required>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="formGroupExampleInput">Apellio paterno</label>
+                                    <input [(ngModel)]="usuario.apellidoPaterno" name="apellidoPaterno" type="text" class="form-control" placeholder="Ingrese el apellido paterno" required>
+                                </div>
+                                <div class="col">
+                                    <label for="formGroupExampleInput">Apellido materno</label>
+                                    <input [(ngModel)]="usuario.apellidoMaterno" name="apellidoMaterno" type="text" class="form-control" placeholder="Ingrese el apellido materno" required>
+                                </div>
                             </div>
-                            <div class="col">
-                                <label for="formGroupExampleInput">Apellido materno</label>
-                                <input [(ngModel)]="usuario.apellidoMaterno" name="apellidoMaterno" type="text" class="form-control" placeholder="Ingrese el apellido materno" required>
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <label for="formGroupExampleInput">Fecha de nacimiento</label>
-                                <input [(ngModel)]="usuario.fechaNacimiento" name="fechaNacimiento" type="date" class="form-control" placeholder="Ingrese la fecha de nacimiento" required>
-                            </div>
-                            <div class="col">
-                                <label for="exampleFormControlSelect1">Género</label>
-                                <select [(ngModel)]="usuario.genero" name="genero" class="form-control" data-show-icon="true">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="formGroupExampleInput">Fecha de nacimiento</label>
+                                    <input [(ngModel)]="usuario.fechaNacimiento" name="fechaNacimiento" type="date" class="form-control" placeholder="Ingrese la fecha de nacimiento" required>
+                                </div>
+                                <div class="col">
+                                    <label for="exampleFormControlSelect1">Género</label>
+                                    <select [(ngModel)]="usuario.genero" name="genero" class="form-control" data-show-icon="true">
                                     <option value="">SELECCIONE UN GÉNERO</option>
                                     <option value="MASCULINO" >Masculino</option>
                                   <option value="FEMENINO">Femenino</option>
                                 </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="formGroupExampleInput">Correo</label>
-                            <input [(ngModel)]="usuario.email" name="email" type="text" class="form-control" placeholder="Ingrese el correo" required>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="formGroupExampleInput">Telefono</label>
-                                <input [(ngModel)]="usuario.telefono" name="telefono" type="number" class="form-control" placeholder="" required>
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Correo</label>
+                                <input [(ngModel)]="usuario.email" name="email" type="text" class="form-control" placeholder="Ingrese el correo" required>
                             </div>
-                            <div class="col">
-                                <label for="exampleFormControlSelect1">ROL</label>
-                                <select [(ngModel)]="usuario.role" name="role" class="form-control" data-show-icon="true" required>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="formGroupExampleInput">Telefono</label>
+                                    <input [(ngModel)]="usuario.telefono" name="telefono" type="number" class="form-control" placeholder="" required>
+                                </div>
+                                <div class="col">
+                                    <label for="exampleFormControlSelect1">ROL</label>
+                                    <select [(ngModel)]="usuario.role" name="role" class="form-control" data-show-icon="true" required>
                                     <option value="" >SELECCIONE UN ROL</option>
                                     <option value="ADMIN_ROLE" >ADMINISTRADOR</option>
                                   <option value="SELLER_ROLE">VENDEDOR</option>
                                   <option value="CLIENT_ROLE">CLIENTE</option>
                                 </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="formGroupExampleInput">Contraseña</label>
-                                <input [(ngModel)]="usuario.password" name="password" type="password" class="form-control" placeholder="" required>
-                            </div>
-                            <div class="col">
-                                <label for="formGroupExampleInput">Confirmar contraseña</label>
-                                <input type="password" class="form-control" placeholder="" required>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="formGroupExampleInput">Contraseña</label>
+                                    <input [(ngModel)]="usuario.password" name="password" type="password" class="form-control" placeholder="" required>
+                                </div>
+                                <div class="col">
+                                    <label for="formGroupExampleInput">Confirmar contraseña</label>
+                                    <input type="password" class="form-control" placeholder="" required>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Guardar</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>

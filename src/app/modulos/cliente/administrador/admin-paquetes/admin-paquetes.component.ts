@@ -63,16 +63,7 @@ export class AdminPaquetesComponent implements OnInit {
     this.valorTotal = Math.round(paquete.numeroClases * paquete.precioUnitario);
     console.log(paquete);
   }
-  busqueda(termino: string) {
-    if (termino === '') {
-      this.traerDatos();
-      return;
-    }
-    this.paqueteService.busqueda(termino)
-          .subscribe((paquete: Paquete[]) => {
-            this.paquetes = paquete;
-    });
-  }
+
   cambiarDesde(numero: number) {
     let desde = this.desde + numero;
     if (desde >= this.totalRegistros) {
@@ -109,7 +100,6 @@ export class AdminPaquetesComponent implements OnInit {
   }
   cargaPaquetes(paquete: Paquete) {
     console.log(paquete);
-    this.nombrePaquete = paquete.nombre;
     this.numeroClases = paquete.numeroClases;
     this.vigencia = paquete.vigencia;
     this.precioUnitario = paquete.precioUnitario;
@@ -152,5 +142,17 @@ export class AdminPaquetesComponent implements OnInit {
     let dias = this.vigencia; // Número de días a agregar
     fecha.setDate(fecha.getDate() + dias);
     return (fecha.toISOString().slice(0, 10 ));
+  }
+  buscar(termino: string) {
+    console.log(termino);
+    if (termino === '') {
+      this.traerDatos();
+      return;
+    }
+    this.usuarioService.busqueda(termino)
+          .subscribe((paquete: Paquete[]) => {
+            console.log(paquete);
+            this.paquetes = paquete;
+    });
   }
 }

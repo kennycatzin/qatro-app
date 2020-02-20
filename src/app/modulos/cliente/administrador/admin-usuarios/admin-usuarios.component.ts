@@ -24,15 +24,10 @@ export class AdminUsuariosComponent implements OnInit {
   ngOnInit() {
     this.traerDatos();
   }
-  traerDatos(  ) {
-    this.cargando = true;
-    this.usuarioService.obtenerUsuarios(this.desde)
+  traerDatos() {
+    this.usuarioService.obtenerUsuarios()
     .subscribe( (data: any) => {
-      console.log(data.usuarios);
       this.objUsuarios = data.usuarios;
-      this.totalUsuarios = data.numero;
-      this.cargando = false;
-      console.log(data.numero);
     });
   }
   hola(obj: any) {
@@ -133,5 +128,17 @@ export class AdminUsuariosComponent implements OnInit {
   }
   nuevo() {
     this.usuario = new Usuario('', '', '', '', '', '', '', '', '', '', '');
+  }
+  busqueda(termino: string) {
+    console.log(termino);
+    if (termino === '') {
+      this.traerDatos();
+      return;
+    }
+    this.usuarioService.busqueda(termino)
+          .subscribe((usuario: Usuario[]) => {
+            console.log(usuario);
+            this.objUsuarios = usuario;
+    });
   }
 }
